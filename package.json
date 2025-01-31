@@ -15,7 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.tsx "
+    "lint": "prettier --check",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +47,18 @@
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-react": "7.37.4",
     "globals": "15.14.0",
+    "husky": "9.1.7",
+    "lint-staged": "15.4.3",
+    "prettier": "3.4.2",
     "typescript-eslint": "8.22.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && git add -A .",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,scss,css,md}": "prettier --write"
   }
 }
