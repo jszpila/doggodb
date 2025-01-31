@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { AppContext } from "./AppContext";
 import { Themes } from "./components/enum/themes";
+import { IUser } from "./interfaces/user";
 
 import Header from './components/Header/Header';
 import LoginForm from "./components/LoginForm/LoginForm";
@@ -11,7 +12,7 @@ import "./themes/index.scss";
 import "./App.scss";
 
 export default function App() {
-  const [user, setUser] = useState<string>('');
+  const [user, setUser] = useState<IUser>();
   const [theme, setTheme] = useState<string>(Themes.Light);
 
   const appCtx = {

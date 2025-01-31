@@ -3,13 +3,24 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../AppContext';
 import { Themes } from '../enum/themes';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiLogOut } from 'react-icons/fi';
+import AuthApi from "../../api/auth";
 
 import './Header.scss';
 
 export default function Header() {
   const [icon, setIcon] = useState(<FiMoon />);
   const context = useContext(AppContext);
+
+  async function handleLogout() {
+    const logoutSucceeded = await AuthApi.logout();
+
+    if (logoutSucceeded) {
+      context.setUser(undefined);
+      console.log('hooray!')
+      // navigate
+    }
+  }
 
   function handleThemeChange(): void { 
     setIcon(context.theme === Themes.Light ? <FiSun /> : <FiMoon />)
@@ -23,6 +34,19 @@ export default function Header() {
         <h2 className="header__subtitle">Find Your Furry Friend</h2>
       </div>
       <div className="header__nav-container">
+        {context.user && (
+          <>
+            <span>Hello, {context.user.name}!</span>
+            <button
+              type="button"
+              className="btn--tertiary"
+              onClick={handleLogout}
+            >
+              <FiLogOut />
+            </button>
+          </>
+        )}
+
         <button
           type="button"
           className="btn--tertiary"
