@@ -1,2 +1,33 @@
 @use "light-default.scss";
 @use "dark-default.scss";
+
+:root {
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+
+  button {
+    padding: var(--spacing-2);
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &.btn--primary {
+      background-color: var(--btn-bg-primary);
+      color: var(--btn-txt-primary);
+
+      &:hover,
+      &:active {
+        background-color: var(--btn-bg-primary--hover);
+      }
+    }
+
+    &.btn--tertiary {
+      background-color: transparent;
+      color: var(--btn-txt-secondary);
+      border: solid 1px transparent;
+    }
+  }
+}

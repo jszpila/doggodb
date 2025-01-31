@@ -15,7 +15,12 @@ body {
   min-height: 100vh;
 }
 
+// TODO: responsiveness
 .content-container {
   width: 1280px;
   margin: 0 auto;
+}
+
+.main-container {
+  border: solid 1px #0FF;
 }

@@ -7,9 +7,13 @@
   --txt-primary: #FFF;
   --txt-secondary: #000;
 
-  // --btn-txt-primary: ;
+  --util-primary: #8b8b8b;
+  --btn-txt-primary: var(--txt-secondary);
   // --btn-txt-secondary: ;
 
-  // --btn-bg-primary: ;
+  --btn-bg-primary: #f47e69;
+  --btn-bg-primary--hover: #ef6a55;
   // --btn-bg-secondary: ;
+
+  --status-error: #F00;
 }
