@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import { AppContext } from "./AppContext";
 import { Themes } from "./components/enum/themes";
@@ -7,6 +7,8 @@ import { IUser } from "./interfaces/user";
 
 import Header from './components/Header/Header';
 import LoginForm from "./components/LoginForm/LoginForm";
+import NotFound from './components/NotFound/NotFound';
+import DoggosContainer from "./components/DoggosContainer/DoggosContainer";
 
 import "./themes/index.scss";
 import "./App.scss";
@@ -28,22 +30,28 @@ export default function App() {
     docBody.classList.toggle(Themes.Dark, theme === Themes.Dark);
   }, [theme]);
 
+  const WrappedDoggosComponent = () => {
+    return appCtx.user ? <DoggosContainer /> : <Navigate to="/" />;
+  };
+
   return (
     <AppContext.Provider value={appCtx}>
       <AppContext.Consumer>
         {(value) => (
-          <div className="App">
-            <div className="content-container">
-              <Header />
-              <main className="main-content">
-                <Router>
+          <Router>
+            <div className="App">
+              <div className="content-container">
+                <Header />
+                <main className="main-content">
                   <Routes>
-                    <Route path="/" element={ <LoginForm /> } />
+                    <Route path="/" element={<LoginForm />} />
+                    <Route path="/doggos" element={<WrappedDoggosComponent />} />
+                    <Route path="*" element={<NotFound />} />
                   </Routes>
-                </Router>
-              </main>
+                </main>
+              </div>
             </div>
-          </div>
+          </Router>
         )}
       </AppContext.Consumer>
     </AppContext.Provider>

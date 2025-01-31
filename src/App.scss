@@ -5,14 +5,10 @@ body {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   font-size: 100%;
-  margin: 0%;
-  padding: 0%;
-}
-
-.App {
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-primary);
   color: var(--txt-primary);
-  min-height: 100vh;
 }
 
 // TODO: responsiveness

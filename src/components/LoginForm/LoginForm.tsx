@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import AuthApi from '../../api/auth';
 import { FiAlertTriangle } from "react-icons/fi";
 import { AppContext } from "../../AppContext";
+import { useNavigate } from "react-router-dom";
 
 import './LoginForm.scss';
 
@@ -15,6 +16,7 @@ export default function LoginForm() {
   const [formHasBeenSubmitted, setFormHasBeenSubmitted] = useState(false);
   const [shouldShowLoginError, setShouldShowLoginError] = useState(false);
   const context = useContext(AppContext);
+  const navigate = useNavigate();
 
   // TODO: more thorough validations, sanitization, etc
   function isFormValid(): boolean {
@@ -32,15 +34,13 @@ export default function LoginForm() {
     setFormHasBeenSubmitted(true);
 
     if (isFormValid()) {
-      console.log("Do the thing");
-
       const loginSucceeded = await AuthApi.login({name, email});
+      
       if (loginSucceeded) {
         setShouldShowLoginError(false);
         context.setUser({name, email});
-        // TODO: navigate
+        navigate('/doggos');
       } else {
-        alert('BOO!')
         setShouldShowLoginError(true);
       }
     }

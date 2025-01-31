@@ -5,20 +5,21 @@ import { AppContext } from '../../AppContext';
 import { Themes } from '../enum/themes';
 import { FiSun, FiMoon, FiLogOut } from 'react-icons/fi';
 import AuthApi from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 import './Header.scss';
 
 export default function Header() {
   const [icon, setIcon] = useState(<FiMoon />);
   const context = useContext(AppContext);
+  const navigate = useNavigate();
 
   async function handleLogout() {
     const logoutSucceeded = await AuthApi.logout();
 
     if (logoutSucceeded) {
       context.setUser(undefined);
-      console.log('hooray!')
-      // navigate
+      navigate('/');
     }
   }
 
