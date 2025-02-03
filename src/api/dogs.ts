@@ -1,19 +1,21 @@
-export interface IDogSearchParams {
+import { SortDirection } from "../enum/sortDirection";
+import { SortField } from "../enum/sortField";
+
+export interface IGetDogsParams {
   breeds?: Array<string>;
   zipCodes?: Array<string>;
   ageMin?: number;
-  ageMax: number;
+  ageMax?: number;
+  size?: number,
+  from?: number,
+  sortField?: SortField,
+  sortDirection?: SortDirection,
 };
-
-interface IDogSearchArgs {
-  params?: IDogSearchParams;
-  errorCallback?: () => void;
-}
 
 const apiUrl = `${process.env.REACT_APP_API_URL}/dogs`;
 
 const DogsApi = {
-  getBreeds: async function(errorCallback?: () => void): Promise<string[]> {
+  getBreeds: async function(): Promise<string[]> {
     try {
       const response = await fetch(
         `${apiUrl}/breeds`,
@@ -24,7 +26,6 @@ const DogsApi = {
       );
 
       if (!response.ok) {
-        if (errorCallback) errorCallback();
         console.error('Error fetching breeds');
         return [];
       }
@@ -37,14 +38,28 @@ const DogsApi = {
     }
   },
 
-  getDogsSearch: async function(args?: IDogSearchArgs) {
+  getDogs: async function(params: IGetDogsParams) {
     try {
-      console.log("bork bork");
-      if (args?.params) {
-        console.log(args.params)
+      const searchParams = new URLSearchParams();
+      let tmpSort = undefined;
+
+      if (params?.sortField && params?.sortDirection) {
+        tmpSort = `${params?.sortField}:${params?.sortDirection}`;
+
+        delete params.sortField;
+        delete params.sortDirection;
       }
+
+      for (const [k, v] of Object.entries(params)) {
+        searchParams.append(k, v);
+      }
+
+      if (tmpSort) {
+        searchParams.append('sort', tmpSort);
+      }
+
       const response = await fetch(
-        `${apiUrl}/search`,
+        `${apiUrl}/search?${searchParams}`,
         {
           method: "GET",
           credentials: "include",
@@ -52,22 +67,42 @@ const DogsApi = {
       );
 
       if (!response.ok) {
-        if (args?.errorCallback) args.errorCallback();
-        console.error("Error fetching breeds");
+        console.error("Error GETing dogs");
+        return {};
+      }
+
+      const payload = await response.json();
+      return payload;
+    } catch (error: unknown) {
+      console.error(error);
+      throw new Error("Error GETing dogs");
+    }
+  },
+
+  postDogs: async function(dogIds: string[]) {
+    if (dogIds.length > 100) {
+      throw new Error("POST /dogs: too many dogs");
+    }
+  
+    try {
+      const response = await fetch(`${apiUrl}`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(dogIds),
+        headers: new Headers({ "Content-Type": "application/json" }),
+      });
+
+      if (!response.ok) {
+        console.error("Error POSTing dogs");
         return [];
       }
 
       const payload = await response.json();
-      console.log(payload);
       return payload;
     } catch (error: unknown) {
       console.error(error);
-      throw new Error("Error fetching breeds");
+      throw new Error("Error POSTing dogs");
     }
-  },
-
-  postDogs: async function() {
-
   },
 
   postDogsMatch: async function() {
