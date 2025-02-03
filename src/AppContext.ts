@@ -5,7 +5,7 @@
  **/
 
 import React, { Dispatch, SetStateAction } from "react";
-import { Themes } from "./enum/themes";
+import { Theme } from "./enum/theme";
 import { IUser } from "./interfaces/user";
 
 export interface IAppContext {
@@ -18,7 +18,7 @@ export interface IAppContext {
 const initialContext: IAppContext = {
   user: undefined,
   setUser: (): void => {},
-  theme: Themes.Light,
+  theme: Theme.Light,
   setTheme: (): void => {},
 }
 
