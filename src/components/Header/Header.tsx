@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../AppContext';
-import { Themes } from '../enum/themes';
+import { Themes } from '../../enum/themes';
 import { FiSun, FiMoon, FiLogOut } from 'react-icons/fi';
 import AuthApi from "../../api/auth";
 import { useNavigate } from "react-router-dom";

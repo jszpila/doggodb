@@ -5,7 +5,7 @@
  **/
 
 import React, { Dispatch, SetStateAction } from "react";
-import { Themes } from "./components/enum/themes";
+import { Themes } from "./enum/themes";
 import { IUser } from "./interfaces/user";
 
 export interface IAppContext {

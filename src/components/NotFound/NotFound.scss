@@ -1,0 +1,10 @@
+.notFound {
+  &__container {
+    text-align: center;
+  }
+
+  &__emoji {
+    font-size: 5rem;
+    padding: var(--spacing-3) 0;
+  }
+}

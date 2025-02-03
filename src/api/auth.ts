@@ -19,7 +19,7 @@ const AuthApi = {
       if (!response.ok) {
         return false;
       }
-      console.log(response);
+
       return true;
     } catch (error: unknown) {
       throw new Error("Error logging in");
@@ -38,7 +38,7 @@ const AuthApi = {
       if (!response.ok) {
         return false;
       }
-      console.log(response);
+
       return true;
     } catch (error: unknown) {
       throw new Error("Error logging out");

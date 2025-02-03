@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import { AppContext } from "./AppContext";
-import { Themes } from "./components/enum/themes";
+import { Themes } from "./enum/themes";
 import { IUser } from "./interfaces/user";
 
 import Header from './components/Header/Header';
