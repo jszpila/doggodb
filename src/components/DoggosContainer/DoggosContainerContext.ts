@@ -2,8 +2,9 @@
 // NOTE: eslint complains about unused vars in method signatures in the createContext call 
 
 import React, { Dispatch, SetStateAction } from "react";
-import { SortFields } from "../../enum/sortFields";
-import { SortDirection } from "../../enum/sortDirections";
+import { SortField } from "../../enum/sortField";
+import { SortDirection } from "../../enum/sortDirection";
+import { FilterField } from "../../enum/filterField";
 
 export interface IDog {
   id: string;
@@ -17,39 +18,40 @@ export interface IDog {
 export interface IDoggosContainerContext {
   dogs: IDog[];
   setDogs: Dispatch<SetStateAction<IDog[]>>;
-  // breeds: Array<string>;
-  // setBreeds: Dispatch<SetStateAction<string[]>>;
-  // selectedDogs: IDog[];
-  // setSelectedDogs: Dispatch<SetStateAction<IDog[]>>;
-  // currentPage: number;
-  // setCurrentPage: Dispatch<SetStateAction<number>>;
-  // sortField: string;
-  // setSortField: Dispatch<SetStateAction<string>>;
-  // sortDirection: string;
-  // setSortDirection: Dispatch<SetStateAction<string>>;
-  // filterField: string | undefined;
-  // setFilterField: Dispatch<SetStateAction<string | undefined>>;
-  // filterValue: string | undefined;
-  // setFilterValue: Dispatch<SetStateAction<string | undefined>>;
+  breeds: string[];
+  setBreeds: Dispatch<SetStateAction<string[]>>;
+  selectedDogs: IDog[];
+  setSelectedDogs: Dispatch<SetStateAction<IDog[]>>;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  sortField: string;
+  setSortField: Dispatch<SetStateAction<SortField>>;
+  sortDirection: string;
+  setSortDirection: Dispatch<SetStateAction<SortDirection>>;
+  filterField: string | undefined;
+  setFilterField: Dispatch<SetStateAction<FilterField>>;
+  filterValue: string | undefined;
+  setFilterValue: Dispatch<SetStateAction<string>>;
 }
 
-// TODO: isolate grid-specific context to its own file
-//  but that is a bit much for the purposes of this exercise
-export const DoggosContainerContext = React.createContext({
+const initialContext: IDoggosContainerContext = {
   dogs: [],
-  setDogs: (dogs: IDog[]): void => {},
-  // breeds: [],
-  // setBreeds: (breeds: string[]): void => {},
-  // selectedDogs: [],
-  // setSelectedDogs: (dogs: IDog[]): void => {},
-  // currentPage: 0,
-  // setCurrentPage: (): void => {},
-  // sortField: SortFields.Breed,
-  // setSortField: (): void => {},
-  // sortDirection: SortDirection.Ascending,
-  // setSortDirection: (): void => {},
-  // filterField: undefined,
-  // setFilterField: (): void => {},
-  // filterValue: undefined,
-  // setFilterValue: (): void => {},
-});
+  setDogs: () => {},
+  breeds: [],
+  setBreeds: () => {},
+  selectedDogs: [],
+  setSelectedDogs: () => {},
+  currentPage: 0,
+  setCurrentPage: () => {},
+  sortField: SortField.Breed,
+  setSortField: () => {},
+  sortDirection: SortDirection.Ascending,
+  setSortDirection: () => {},
+  filterField: FilterField.None,
+  setFilterField: () => {},
+  filterValue: '',
+  setFilterValue: () => {},
+};
+
+export const DoggosContainerContext = React.createContext(initialContext);
+

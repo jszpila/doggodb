@@ -1,3 +1,7 @@
 .doggos-grid {
 
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
