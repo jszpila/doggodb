@@ -4,6 +4,8 @@
   padding: 0 var(--spacing-2);
   align-items: center;
   display: flex;
+  position: fixed;
+  width: calc(1280px - (var(--spacing-2) * 2)); // TODO: responsiveness
 
   &__title-container,
   &__nav-container {

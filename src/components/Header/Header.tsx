@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../AppContext';
-import { Themes } from '../../enum/themes';
+import { Theme } from '../../enum/theme';
 import { FiSun, FiMoon, FiLogOut } from 'react-icons/fi';
 import AuthApi from "../../api/auth";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +24,8 @@ export default function Header() {
   }
 
   function handleThemeChange(): void { 
-    setIcon(context.theme === Themes.Light ? <FiSun /> : <FiMoon />)
-    context.setTheme(context.theme === Themes.Light ? Themes.Dark : Themes.Light);
+    setIcon(context.theme === Theme.Light ? <FiSun /> : <FiMoon />)
+    context.setTheme(context.theme === Theme.Light ? Theme.Dark : Theme.Light);
   }
 
   return (

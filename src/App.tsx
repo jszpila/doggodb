@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import { AppContext } from "./AppContext";
-import { Themes } from "./enum/themes";
+import { Theme } from "./enum/theme";
 import { IUser } from "./interfaces/user";
 
 import Header from './components/Header/Header';
@@ -15,7 +15,7 @@ import "./App.scss";
 
 export default function App() {
   const [user, setUser] = useState<IUser>();
-  const [theme, setTheme] = useState<string>(Themes.Light);
+  const [theme, setTheme] = useState<string>(Theme.Light);
 
   const appCtx = {
     user,
@@ -26,8 +26,8 @@ export default function App() {
 
   useEffect(() => {
     const docBody = document.body;
-    docBody.classList.toggle(Themes.Light, theme === Themes.Light);
-    docBody.classList.toggle(Themes.Dark, theme === Themes.Dark);
+    docBody.classList.toggle(Theme.Light, theme === Theme.Light);
+    docBody.classList.toggle(Theme.Dark, theme === Theme.Dark);
   }, [theme]);
 
   const WrappedDoggosComponent = () => {
