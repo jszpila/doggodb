@@ -33,12 +33,17 @@
   }
 
   &__name {
-    // display: inline-block;
     font-size: 1.25rem;
     font-weight: 800;
-    margin: 0;
+    margin: 0 0 var(--spacing-1) 0;
     padding: 0;
-    margin: 0 0 var(--spacing-2) 0;
-    padding: 0 var(--spacing-2) 0 0;
+  }
+
+  &__buttons-container {
+    position: relative;
+    right: 0;
+    z-index: 2;
+    bottom: 83px;
+    text-align: right;
   }
 }

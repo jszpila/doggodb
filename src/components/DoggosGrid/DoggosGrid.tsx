@@ -3,7 +3,7 @@ import { RequestStatus } from "../../enum/requestStatus";
 import { DoggosContainerContext, IDog } from "../DoggosContainer/DoggosContainerContext";
 import { SortField } from "../../enum/sortField";
 import { SortDirection } from "../../enum/sortDirection";
-import { FiFrown, FiRefreshCw } from "react-icons/fi";
+import { FiFrown, FiRefreshCw, FiSearch } from "react-icons/fi";
 import DogsApi from "../../api/dogs";
 import FilterControls from "./FilterControls/FilterControls";
 import SortControls from "./SortControls/SortControls";
@@ -17,7 +17,17 @@ export default function DoggosGrid() {
   const [dogsRequestStatus, setDogsRequestStatus] = useState(RequestStatus.Idle);
 
   const context = useContext(DoggosContainerContext);  
-  
+
+  function populateZipCodeList(dogs: IDog[]) {
+    const zips: string[] = [];
+
+    dogs.forEach(({zip_code}) => {
+      if (!zips.includes(zip_code)) zips.push(zip_code);
+    });
+
+    context.setZipCodes(zips);
+  };
+
   useEffect(() => {
     const fetchBreeds = async () => {
       try {
@@ -41,7 +51,6 @@ export default function DoggosGrid() {
     const fetchDogs = async() => {
       try {
         if (dogsRequestStatus === RequestStatus.Idle) {
-          console.log(dogsRequestStatus)
           const initialSearchParams = {
             from: 0,
             sortField: SortField.Breed,
@@ -55,6 +64,7 @@ export default function DoggosGrid() {
           
           context.setDogs(presentableData);
           setDogsRequestStatus(RequestStatus.Success);
+          populateZipCodeList(presentableData);
         }
       } catch (error) {
         console.error(error);
@@ -65,16 +75,31 @@ export default function DoggosGrid() {
     fetchDogs();
   }, [dogsRequestStatus, context]);
 
+  function handleSearch() {
+    console.log('search');
+  }
+
   return (
     <div className="doggos-grid__container">
-      <div className="doggos-grid__controls">
-        <FilterControls />
-        <SortControls />
-      </div>
+      <form className="doggos-grid__form">
+        <div className="doggos-grid__controls">
+          <FilterControls />
+          <div className="form-row">
+            <div className="form-row__half">
+              <SortControls />
+            </div>
+            <div className="form-row__half form-row__half--lower-right">
+              <button type="button" className="btn--primary" onClick={handleSearch}>
+                <FiSearch />&nbsp; Search Doggos
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
       <div className="doggos-grid__body">
         {dogsRequestStatus === RequestStatus.Error && (
           <span>
-            <FiFrown /> 
+            <FiFrown />
             Error loading dogs
           </span>
         )}
@@ -90,7 +115,7 @@ export default function DoggosGrid() {
           context.dogs.length > 0 && (
             <>
               {context.dogs.map((dog) => (
-                <GridItem key={dog.id} dog={ dog } />
+                <GridItem key={dog.id} dog={dog} />
               ))}
             </>
           )}

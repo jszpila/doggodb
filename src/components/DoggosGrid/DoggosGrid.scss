@@ -1,4 +1,69 @@
 .doggos-grid {
+  &__form {
+    background-color: var(--surface-2);
+    margin: 0 0 var(--spacing-2) 0;
+    padding: var(--spacing-2);
+    border: solid 1px var(--surface-3);
+  }
+
+  &__form-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+
+  }
+
+  &__controls {
+    .form-row {
+      padding-top: var(--spacing-1);
+      display: flex;
+    }
+
+    .form-row__half {
+      flex: 1;
+    }
+
+    .form-row__half--lower-right {
+      display: flex;
+      justify-content: right;
+    }
+
+    .controls-title {
+      margin: 0;
+      padding: 0;
+    }
+
+    .controls-wrapper {
+      display: flex;
+    }
+
+    .controls-container {
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .control-container {
+      flex: 1;
+    }
+
+    .control-label {
+      display: block;
+      padding-bottom: var(--spacing-1);
+    }
+
+    .control--text,
+    .control--number,
+    .control--select {
+      font-size: 1rem;
+      padding: var(--spacing-1);
+      width: calc(100% - (var(--spacing-2) * 2));
+      border: solid 1px var(--surface-3);
+    }
+
+    .control--number {
+      width: auto;
+    }
+  }
 
   &__body {
     display: flex;

@@ -2,11 +2,13 @@ import React from "react";
 import { IDog } from "../../DoggosContainer/DoggosContainerContext";
 
 import './GridItem.scss';
+import { FiHeart, FiStar } from "react-icons/fi";
 
 interface GridItemProps {
   dog: IDog,
 }
 
+// TODO: implement onClicks
 export default function GridItem({ dog }: GridItemProps) {
   return (
     <div className="grid-item">
@@ -22,6 +24,14 @@ export default function GridItem({ dog }: GridItemProps) {
             <span>
               {dog.age} | {dog.breed} | {dog.zip_code}
             </span>
+          </div>
+          <div className="grid-item__buttons-container">
+            <button className="btn--secondary">
+              <FiStar />
+            </button>
+            <button className="btn--secondary">
+              <FiHeart />
+            </button>
           </div>
         </div>
       </div>
