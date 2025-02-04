@@ -24,6 +24,21 @@
       }
     }
 
+    &.btn--secondary {
+      padding: var(--spacing-1);
+      background-color: var(--btn-bg-primary);
+      color: var(--btn-txt-primary);
+
+      &:hover,
+      &:active {
+        background-color: var(--btn-bg-primary--hover);
+      }
+    }
+
+    &.btn--secondary-selected {
+      
+    }
+
     &.btn--tertiary {
       background-color: transparent;
       color: var(--btn-txt-secondary);
