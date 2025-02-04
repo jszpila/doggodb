@@ -32,6 +32,8 @@ export interface IDoggosContainerContext {
   setFilterField: Dispatch<SetStateAction<FilterField>>;
   filterValue: string | undefined;
   setFilterValue: Dispatch<SetStateAction<string>>;
+  zipCodes: string[];
+  setZipCodes: Dispatch<SetStateAction<string[]>>;
 }
 
 const initialContext: IDoggosContainerContext = {
@@ -51,6 +53,8 @@ const initialContext: IDoggosContainerContext = {
   setFilterField: () => {},
   filterValue: '',
   setFilterValue: () => {},
+  zipCodes: [],
+  setZipCodes: () => {},
 };
 
 export const DoggosContainerContext = React.createContext(initialContext);
