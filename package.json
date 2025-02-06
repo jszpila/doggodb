@@ -1,6 +1,6 @@
 {
-  "name": "dog-db",
-  "homepage": "https://github.com/jszpila/doggodb",
+  "name": "doggo-db",
+  "homepage": "https://jszpila.github.com/doggodb",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
