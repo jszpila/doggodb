@@ -1,0 +1,31 @@
+.match-modal {
+  z-index: 100;
+  position: fixed;
+  background-color: var(--bg-primary);
+  color: var(--txt-primary);
+  border: solid 1px var(--surface-3);
+  width: 50vw;
+  left: 25vw;
+  top: 15vh;
+
+  &__title {
+    margin-top: 0;
+  }
+
+  &__body {
+    padding: var(--spacing-2);
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__buttons {
+    margin-top: var(--spacing-2);
+    text-align: right;
+  }
+}

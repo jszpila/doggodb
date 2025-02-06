@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { RequestStatus } from "../../enum/requestStatus";
 import { DoggosContainerContext, IDog } from "../DoggosContainer/DoggosContainerContext";
 import { SortField } from "../../enum/sortField";
@@ -22,12 +22,13 @@ export default function DoggosGrid() {
 
   const [breedsRequestStatus, setBreedsRequestStatus] = useState(RequestStatus.Idle);
   const [dogsRequestStatus, setDogsRequestStatus] = useState(RequestStatus.Idle);
+  const [dogRequestStatus, setDogRequestStatus] = useState(RequestStatus.Idle);
   const [currentPage, setCurrentPage] = useState(0);
   const [numPages, setNumPages] = useState(0);
   const [nextUrl, setNextUrl] = useState("");
   const [prevUrl, setPrevUrl] = useState("");
 
-  const fetchDogs = async (
+  const fetchDogs = useCallback(async (
       params: IGetDogsParams, 
       allowedStatus: RequestStatus,
       successCb?: () => void) => {
@@ -48,6 +49,29 @@ export default function DoggosGrid() {
     } catch (error) {
       console.error(error);
       setDogsRequestStatus(RequestStatus.Error);
+    }
+  }, [context, dogsRequestStatus]);
+
+  const fetchDog = async() => {
+    const dogIds = [];
+
+    for (const dog of context.selectedDogs) {
+      dogIds.push(dog.id);
+    }
+
+    try {
+      if (dogRequestStatus !== RequestStatus.InProgress ) {
+        setDogRequestStatus(RequestStatus.InProgress);
+        const matchId = await DogsApi.postDogsMatch(dogIds);
+        const match = await DogsApi.postDogs([matchId.match]);
+
+        setDogRequestStatus(RequestStatus.Success);
+        context.setMatch(match[0]);
+        context.setShouldShowMatchModal(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setDogRequestStatus(RequestStatus.Error);
     }
   };
 
@@ -79,7 +103,7 @@ export default function DoggosGrid() {
     },
     RequestStatus.Idle,
     () => { setCurrentPage(currentPage + 1)});
-  }, [dogsRequestStatus, context]);
+  }, [dogsRequestStatus, context, currentPage, fetchDogs]);
 
   function handleSearch() {
     const { filterValue, sortField, sortDirection} = context;
@@ -131,13 +155,7 @@ export default function DoggosGrid() {
   }
 
   function handleGetMatch() {
-    const dogIds = [];
-
-    for (const dog of context.selectedDogs) {
-      dogIds.push(dog.id);
-    }
-
-    console.log(dogIds);
+    fetchDog();
   };
 
   // TODO:

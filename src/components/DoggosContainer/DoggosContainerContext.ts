@@ -34,6 +34,10 @@ export interface IDoggosContainerContext {
   setFilterValue: Dispatch<SetStateAction<string | string[] | undefined>>;
   zipCodes: string[];
   setZipCodes: Dispatch<SetStateAction<string[]>>;
+  match: IDog | undefined;
+  setMatch: Dispatch<SetStateAction<IDog | undefined>>;
+  shouldShowMatchModal: boolean;
+  setShouldShowMatchModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const initialContext: IDoggosContainerContext = {
@@ -55,6 +59,10 @@ const initialContext: IDoggosContainerContext = {
   setFilterValue: () => {},
   zipCodes: [],
   setZipCodes: () => {},
+  match: undefined,
+  setMatch: () => {},
+  shouldShowMatchModal: false,
+  setShouldShowMatchModal: () => {},
 };
 
 export const DoggosContainerContext = React.createContext(initialContext);
