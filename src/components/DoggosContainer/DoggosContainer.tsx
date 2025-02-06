@@ -49,7 +49,6 @@ export default function DoggosContainer() {
 
   return (
     <section className="doggos-container">
-      {shouldShowMatchModal.toString()}
       <DoggosContainerContext.Provider value={initialCtxValue}>
         <DoggosContainerContext.Consumer>
           {(value) => (

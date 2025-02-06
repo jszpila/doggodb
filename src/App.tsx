@@ -7,7 +7,6 @@ import { IUser } from "./interfaces/user";
 
 import Header from './components/Header/Header';
 import LoginForm from "./components/LoginForm/LoginForm";
-import NotFound from './components/NotFound/NotFound';
 import DoggosContainer from "./components/DoggosContainer/DoggosContainer";
 
 import "./themes/index.scss";
@@ -46,7 +45,7 @@ export default function App() {
                   <Routes>
                     <Route path="/" element={<LoginForm />} />
                     <Route path="/doggos" element={<WrappedDoggosComponent />} />
-                    <Route path="/*" element={<LoginForm />} />
+                    <Route path="/*" element={<LoginForm />} /> {/* NOTE: not using NotFound because github pages hosting is weird about routing */}
                   </Routes>
                 </main>
               </div>
