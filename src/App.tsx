@@ -44,7 +44,7 @@ export default function App() {
                 <Header />
                 <main className="main-content">
                   <Routes>
-                    <Route path="/" element={<LoginForm />} />
+                    <Route path="/dpggodb" element={<LoginForm />} />
                     <Route path="/doggodb/doggos" element={<WrappedDoggosComponent />} />
                     <Route path="/doggodb/*" element={<NotFound />} />
                   </Routes>

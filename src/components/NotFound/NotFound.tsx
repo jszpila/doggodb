@@ -10,7 +10,7 @@ export default function NotFound() {
         🤷🏻‍♂️🤔😵‍💫
       </div>
       <div className="notFound__message">
-        You should probably <Link to={{pathname: '/'}}>login</Link>
+        You should probably <Link to={{pathname: '/doggodb'}}>login</Link>
       </div>
     </section>
   );
