@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/jszpila/doggodb/static/css/main.de290308.css",
-    "main.js": "/jszpila/doggodb/static/js/main.10b3dcbb.js",
-    "index.html": "/jszpila/doggodb/index.html",
-    "main.de290308.css.map": "/jszpila/doggodb/static/css/main.de290308.css.map",
-    "main.10b3dcbb.js.map": "/jszpila/doggodb/static/js/main.10b3dcbb.js.map"
+    "main.css": "/doggodb/static/css/main.de290308.css",
+    "main.js": "/doggodb/static/js/main.10b3dcbb.js",
+    "index.html": "/doggodb/index.html",
+    "main.de290308.css.map": "/doggodb/static/css/main.de290308.css.map",
+    "main.10b3dcbb.js.map": "/doggodb/static/js/main.10b3dcbb.js.map"
   },
   "entrypoints": [
     "static/css/main.de290308.css",
