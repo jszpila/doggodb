@@ -121,8 +121,26 @@ const DogsApi = {
     }
   },
 
-  postDogsMatch: async function() {
+  postDogsMatch: async function(dogIds: string[]) {
+    try {
+      const response = await fetch(`${apiRootUrl}/dogs/match`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(dogIds),
+        headers: new Headers({ "Content-Type": "application/json" }),
+      });
 
+      if (!response.ok) {
+        console.error("Error POSTing dogs/match");
+        return [];
+      }
+
+      const payload = await response.json();
+      return payload;
+    } catch (error: unknown) {
+      console.error(error);
+      throw new Error("Error POSTing dogs/match");
+    }
   },
 };
 
