@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { IDog } from "../../DoggosContainer/DoggosContainerContext";
+import React, { useContext, useState } from "react";
+import { DoggosContainerContext, IDog } from "../../DoggosContainer/DoggosContainerContext";
 import { FiHeart } from "react-icons/fi";
 
 import './GridItem.scss';
@@ -9,14 +9,19 @@ interface GridItemProps {
   onFavorite: (dog: IDog) => void,
 }
 
-// TODO: implement onClicks
 export default function GridItem({ dog, onFavorite }: GridItemProps) {
-  const [hasBeenFavorited, setHasBeenFavorited] = useState(false);
+  const { selectedDogs } = useContext(DoggosContainerContext);
+
+  const [hasBeenFavorited, setHasBeenFavorited] = useState(selectedDogs.find((d: IDog) => d.id === dog.id) !== undefined);
 
   function handleFavorite() {
     setHasBeenFavorited(!hasBeenFavorited);
     onFavorite(dog);
   }
+
+  // NOTE: persist button style 
+  const shouldApplyButtonStyle = () =>
+    hasBeenFavorited || selectedDogs.find((d: IDog) => d.id === dog.id);
 
   return (
     <div className="grid-item">
@@ -35,7 +40,7 @@ export default function GridItem({ dog, onFavorite }: GridItemProps) {
           </div>
           <div className="grid-item__buttons-container">
             <button 
-              className={`btn--fav ${ hasBeenFavorited ? 'btn--fav-selected' : ''}`}
+              className={`btn--fav ${ shouldApplyButtonStyle() ? 'btn--fav-selected' : ''}`}
               onClick={handleFavorite}>
               <FiHeart />
             </button>

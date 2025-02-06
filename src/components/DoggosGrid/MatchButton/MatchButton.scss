@@ -1,0 +1,9 @@
+.match-button {
+  flex: 1;
+  margin: var(--spacing-2) 0;
+  align-content: center;
+
+  &__message {
+    font-style: italic;
+  }
+}

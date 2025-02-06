@@ -9,9 +9,10 @@ import FilterControls from "./FilterControls/FilterControls";
 import SortControls from "./SortControls/SortControls";
 import Paginator from "./Paginator/Paginator";
 import GridItem from "./GridItem/GridItem";
+import { RequestAction } from "../../enum/requestAction";
+import MatchButton from "./MatchButton/MatchButton";
 
 import "./DoggosGrid.scss";
-import { RequestAction } from "../../enum/requestAction";
 
 export default function DoggosGrid() {
   // TODO: support user-configurable page size
@@ -104,7 +105,7 @@ export default function DoggosGrid() {
     );
   }
 
-  function handleNext() {
+  function handleNextPage() {
     fetchDogs(
       { nextUrl, requestAction: RequestAction.Next },
       RequestStatus.Success,
@@ -112,7 +113,7 @@ export default function DoggosGrid() {
     );
   }
 
-  function handlePrevious() {
+  function handlePreviousPage() {
     fetchDogs(
       { prevUrl, requestAction: RequestAction.Previous }, 
       RequestStatus.Success,
@@ -121,19 +122,27 @@ export default function DoggosGrid() {
   }
 
   function handleFavorite(selectedDog: IDog) {
-    const {selectedDogs, setSelectedDogs} = context;
-    let tmpDogs: IDog[] = selectedDogs;
-
-
-    if (!selectedDogs.find((dog) => dog.id === selectedDog.id)) {
-      tmpDogs.push(selectedDog);
+    const { selectedDogs, setSelectedDogs } = context;
+    if (!selectedDogs.find((dog: IDog) => dog.id === selectedDog.id)) {
+      setSelectedDogs([...selectedDogs, selectedDog]);
     } else {
-      tmpDogs = tmpDogs.filter((dog) => dog.id !== selectedDog.id);
+      setSelectedDogs(selectedDogs.filter((dog: IDog) => dog.id !== selectedDog.id));
     }
-
-    setSelectedDogs(tmpDogs)
   }
 
+  function handleGetMatch() {
+    const dogIds = [];
+
+    for (const dog of context.selectedDogs) {
+      dogIds.push(dog.id);
+    }
+
+    console.log(dogIds);
+  };
+
+  // TODO:
+  // - move controls into container component
+  // - break messages into their own components hosted in a single file
   return (
     <div className="doggos-grid__container">
       <form className="doggos-grid__form">
@@ -151,12 +160,15 @@ export default function DoggosGrid() {
           </button>
         </div>
       </form>
-      <Paginator
-        curPage={currentPage}
-        numPages={numPages}
-        onNext={handleNext}
-        onPrev={handlePrevious}
-      />
+      <div className="doggos-grid__controls">
+        <MatchButton onGetMatch={handleGetMatch}/>
+        <Paginator
+          curPage={currentPage}
+          numPages={numPages}
+          onNext={handleNextPage}
+          onPrev={handlePreviousPage}
+        />
+      </div>
       <div className="doggos-grid__body">
         {dogsRequestStatus === RequestStatus.Error && (
           <span>
@@ -176,10 +188,7 @@ export default function DoggosGrid() {
           context.dogs.length > 0 && (
             <>
               {context.dogs.map((dog) => (
-                <GridItem 
-                  key={dog.id} 
-                  dog={dog} 
-                  onFavorite={handleFavorite} />
+                <GridItem key={dog.id} dog={dog} onFavorite={handleFavorite} />
               ))}
             </>
           )}
