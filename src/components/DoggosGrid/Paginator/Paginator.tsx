@@ -10,7 +10,6 @@ interface IProps {
   onPrev: () => void;
 }
 
-
 export default function Paginator({curPage, numPages, onNext, onPrev}: IProps) {
   function handlePrevious() {
     onPrev();

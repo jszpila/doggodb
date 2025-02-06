@@ -1,7 +1,6 @@
 .doggos-grid {
   &__form {
     background-color: var(--surface-2);
-    margin: 0 0 var(--spacing-2) 0;
     padding: var(--spacing-2);
     border: solid 1px var(--surface-3);
   }
@@ -56,5 +55,6 @@
   &__body {
     display: flex;
     flex-wrap: wrap;
+    margin-top: var(--spacing-2);
   }
 }
