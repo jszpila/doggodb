@@ -1,10 +1,14 @@
 .grid-item {
-  height: 410px;
-  width: 410px;
+  height: 308px;
+  width: 308px;
   text-align: left;
   position: relative;
-  // border: solid 1px #0F0;
-  // background-color: #000;
+
+  &:hover {
+    .grid-item__info-wrapper {
+      background-color: var(--surface-2);
+    }
+  }
 
   &__wrapper {
     position: relative;

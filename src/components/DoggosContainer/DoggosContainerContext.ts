@@ -30,8 +30,8 @@ export interface IDoggosContainerContext {
   setSortDirection: Dispatch<SetStateAction<SortDirection>>;
   filterField: string | undefined;
   setFilterField: Dispatch<SetStateAction<FilterField>>;
-  filterValue: string | undefined;
-  setFilterValue: Dispatch<SetStateAction<string>>;
+  filterValue: string | string[] | undefined;
+  setFilterValue: Dispatch<SetStateAction<string | string[] | undefined>>;
   zipCodes: string[];
   setZipCodes: Dispatch<SetStateAction<string[]>>;
 }
@@ -51,7 +51,7 @@ const initialContext: IDoggosContainerContext = {
   setSortDirection: () => {},
   filterField: FilterField.None,
   setFilterField: () => {},
-  filterValue: '',
+  filterValue: undefined,
   setFilterValue: () => {},
   zipCodes: [],
   setZipCodes: () => {},

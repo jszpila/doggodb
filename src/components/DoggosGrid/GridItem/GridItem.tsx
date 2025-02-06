@@ -1,8 +1,8 @@
 import React from "react";
 import { IDog } from "../../DoggosContainer/DoggosContainerContext";
+import { FiHeart } from "react-icons/fi";
 
 import './GridItem.scss';
-import { FiHeart, FiStar } from "react-icons/fi";
 
 interface GridItemProps {
   dog: IDog,
@@ -26,9 +26,6 @@ export default function GridItem({ dog }: GridItemProps) {
             </span>
           </div>
           <div className="grid-item__buttons-container">
-            <button className="btn--secondary">
-              <FiStar />
-            </button>
             <button className="btn--secondary">
               <FiHeart />
             </button>

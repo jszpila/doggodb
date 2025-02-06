@@ -1,24 +1,28 @@
+import { RequestAction } from "../enum/requestAction";
 import { SortDirection } from "../enum/sortDirection";
 import { SortField } from "../enum/sortField";
 
 export interface IGetDogsParams {
-  breeds?: Array<string>;
-  zipCodes?: Array<string>;
+  breeds?: string | string[] | undefined;
+  zipCodes?: string[];
   ageMin?: number;
   ageMax?: number;
-  size?: number,
-  from?: number,
-  sortField?: SortField,
-  sortDirection?: SortDirection,
+  size?: number;
+  from?: number;
+  sortField?: SortField;
+  sortDirection?: SortDirection;
+  nextUrl?: string;
+  prevUrl?: string;
+  requestAction?: RequestAction;
 };
 
-const apiUrl = `${process.env.REACT_APP_API_URL}/dogs`;
+const apiRootUrl = `${process.env.REACT_APP_API_URL}`;
 
 const DogsApi = {
   getBreeds: async function(): Promise<string[]> {
     try {
       const response = await fetch(
-        `${apiUrl}/breeds`,
+        `${apiRootUrl}/dogs/breeds`,
         {
           method: "GET",
           credentials: "include",
@@ -39,7 +43,11 @@ const DogsApi = {
   },
 
   getDogs: async function(params: IGetDogsParams) {
-    try {
+    const { requestAction } = params;
+
+    let url = apiRootUrl;
+  
+    if (!requestAction || requestAction === RequestAction.Initial) {
       const searchParams = new URLSearchParams();
       let tmpSort = undefined;
 
@@ -55,11 +63,19 @@ const DogsApi = {
       }
 
       if (tmpSort) {
-        searchParams.append('sort', tmpSort);
+        searchParams.append("sort", tmpSort);
       }
 
+      url = `${apiRootUrl}/dogs/search?${searchParams}`;
+    } else if (requestAction === RequestAction.Next) {
+      url = `${apiRootUrl}${params.nextUrl}`;
+    } else if (requestAction === RequestAction.Previous) {
+      url = `${apiRootUrl}${params.prevUrl}`;
+    }
+
+    try {
       const response = await fetch(
-        `${apiUrl}/search?${searchParams}`,
+        url,
         {
           method: "GET",
           credentials: "include",
@@ -85,7 +101,7 @@ const DogsApi = {
     }
   
     try {
-      const response = await fetch(`${apiUrl}`, {
+      const response = await fetch(`${apiRootUrl}/dogs`, {
         method: "POST",
         credentials: "include",
         body: JSON.stringify(dogIds),

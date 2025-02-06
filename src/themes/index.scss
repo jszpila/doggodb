@@ -14,9 +14,20 @@
     font-weight: 700;
     text-transform: uppercase;
 
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    > svg {
+        position: relative;
+        top: 3px;
+      }
+  
     &.btn--primary {
       background-color: var(--btn-bg-primary);
       color: var(--btn-txt-primary);
+      position: relative;
 
       &:hover,
       &:active {

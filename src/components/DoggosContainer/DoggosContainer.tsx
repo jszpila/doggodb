@@ -16,7 +16,7 @@ export default function DoggosContainer() {
   const [sortField, setSortField] = useState(SortField.Breed);
   const [sortDirection, setSortDirection] = useState(SortDirection.Ascending);
   const [filterField, setFilterField] = useState(FilterField.None);
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState<string | string[] | undefined>(undefined);
   const [zipCodes, setZipCodes] = useState<string[]>([]);
 
   const initialCtxValue = {

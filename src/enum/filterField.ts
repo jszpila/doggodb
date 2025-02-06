@@ -1,6 +1,6 @@
 export enum FilterField {
   None = '',
-  Breed = 'breed',
+  Breeds = 'breeds',
   MinAge = "minAge",
   MaxAge = "maxAge",
   Name = "name",

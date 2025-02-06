@@ -14,19 +14,8 @@
   }
 
   &__controls {
-    .form-row {
-      padding-top: var(--spacing-1);
-      display: flex;
-    }
-
-    .form-row__half {
-      flex: 1;
-    }
-
-    .form-row__half--lower-right {
-      display: flex;
-      justify-content: right;
-    }
+    display: flex;
+    flex-direction: row;
 
     .controls-title {
       margin: 0;

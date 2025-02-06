@@ -1,3 +1,23 @@
 .paginator {
-  flex: 1;
+  margin: var(--spacing-2) 0;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  button {
+    width: 36px;
+  }
+
+  &__box {
+    padding: 0 var(--spacing-1);
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
 }
