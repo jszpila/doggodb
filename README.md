@@ -16,3 +16,7 @@ npm start                       # start the project
 Voilà! You should now be able to use the site, hosted on [http://localhost:3000/doggodb](http://localhost:3000/doggodb), unless your ports are configured differently.
 
 Don't want to go through all that? You can view the project live at [jszpila.github.io/doggodb](https://jszpila.github.io/doggodb)
+
+### Additional Configuration
+
+The API url can be changed via setting `REACT_APP_API_URL` in your shell environment, or by editing the _.env_ file accordingly.
