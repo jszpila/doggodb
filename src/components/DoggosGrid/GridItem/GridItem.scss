@@ -50,4 +50,26 @@
     bottom: 83px;
     text-align: right;
   }
+
+  .btn--fav {
+    padding: var(--spacing-1);
+    background-color: var(--btn-txt-primary);
+    color: var(--btn-bg-primary);
+
+    &:hover,
+    &:active {
+      background-color: var(--btn-bg-primary--hover);
+      color: var(--btn-txt-primary);
+    }
+  }
+
+  .btn--fav-selected {
+    background-color: var(--btn-bg-primary);
+    color: var(--btn-txt-primary);
+
+    &:hover,
+    &:active {
+      background-color: var(--btn-bg-primary--hover);
+    }
+  }
 }

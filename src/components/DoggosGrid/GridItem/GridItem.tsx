@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IDog } from "../../DoggosContainer/DoggosContainerContext";
 import { FiHeart } from "react-icons/fi";
 
@@ -6,10 +6,18 @@ import './GridItem.scss';
 
 interface GridItemProps {
   dog: IDog,
+  onFavorite: (dog: IDog) => void,
 }
 
 // TODO: implement onClicks
-export default function GridItem({ dog }: GridItemProps) {
+export default function GridItem({ dog, onFavorite }: GridItemProps) {
+  const [hasBeenFavorited, setHasBeenFavorited] = useState(false);
+
+  function handleFavorite() {
+    setHasBeenFavorited(!hasBeenFavorited);
+    onFavorite(dog);
+  }
+
   return (
     <div className="grid-item">
       <div className="grid-item__wrapper">
@@ -26,7 +34,9 @@ export default function GridItem({ dog }: GridItemProps) {
             </span>
           </div>
           <div className="grid-item__buttons-container">
-            <button className="btn--secondary">
+            <button 
+              className={`btn--fav ${ hasBeenFavorited ? 'btn--fav-selected' : ''}`}
+              onClick={handleFavorite}>
               <FiHeart />
             </button>
           </div>

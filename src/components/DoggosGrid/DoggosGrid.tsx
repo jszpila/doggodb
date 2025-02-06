@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RequestStatus } from "../../enum/requestStatus";
-import { DoggosContainerContext } from "../DoggosContainer/DoggosContainerContext";
+import { DoggosContainerContext, IDog } from "../DoggosContainer/DoggosContainerContext";
 import { SortField } from "../../enum/sortField";
 import { SortDirection } from "../../enum/sortDirection";
 import { FiFrown, FiRefreshCw, FiSearch } from "react-icons/fi";
@@ -120,6 +120,20 @@ export default function DoggosGrid() {
     );
   }
 
+  function handleFavorite(selectedDog: IDog) {
+    const {selectedDogs, setSelectedDogs} = context;
+    let tmpDogs: IDog[] = selectedDogs;
+
+
+    if (!selectedDogs.find((dog) => dog.id === selectedDog.id)) {
+      tmpDogs.push(selectedDog);
+    } else {
+      tmpDogs = tmpDogs.filter((dog) => dog.id !== selectedDog.id);
+    }
+
+    setSelectedDogs(tmpDogs)
+  }
+
   return (
     <div className="doggos-grid__container">
       <form className="doggos-grid__form">
@@ -162,11 +176,13 @@ export default function DoggosGrid() {
           context.dogs.length > 0 && (
             <>
               {context.dogs.map((dog) => (
-                <GridItem key={dog.id} dog={dog} />
+                <GridItem 
+                  key={dog.id} 
+                  dog={dog} 
+                  onFavorite={handleFavorite} />
               ))}
             </>
           )}
-        {/* <GridItem dog={dog} /> */}
       </div>
     </div>
   );

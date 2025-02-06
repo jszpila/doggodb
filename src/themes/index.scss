@@ -9,7 +9,7 @@
   button {
     padding: var(--spacing-2);
     font-size: 1rem;
-    border: none;
+    border: solid 1px transparent;
     cursor: pointer;
     font-weight: 700;
     text-transform: uppercase;
@@ -44,10 +44,6 @@
       &:active {
         background-color: var(--btn-bg-primary--hover);
       }
-    }
-
-    &.btn--secondary-selected {
-      
     }
 
     &.btn--tertiary {
