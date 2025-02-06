@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/doggodb/static/css/main.b344d107.css",
-    "main.js": "/doggodb/static/js/main.bb856e4f.js",
+    "main.js": "/doggodb/static/js/main.0dfe828a.js",
     "index.html": "/doggodb/index.html",
     "main.b344d107.css.map": "/doggodb/static/css/main.b344d107.css.map",
-    "main.bb856e4f.js.map": "/doggodb/static/js/main.bb856e4f.js.map"
+    "main.0dfe828a.js.map": "/doggodb/static/js/main.0dfe828a.js.map"
   },
   "entrypoints": [
     "static/css/main.b344d107.css",
-    "static/js/main.bb856e4f.js"
+    "static/js/main.0dfe828a.js"
   ]
 }
