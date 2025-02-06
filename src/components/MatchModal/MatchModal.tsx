@@ -19,11 +19,13 @@ export default function MatchModal() {
           <span className="match-modal__name">{match?.name}</span>,
           a {match?.age} year old {match?.breed}! Good job!
         </p>
-        <img
-          className="match-modal__img"
-          src={match?.img}
-          alt={`${match?.name} | ${match?.age} | ${match?.breed}`}
-        />
+        <div className="match-modal__img-wrapper">
+          <img
+            className="match-modal__img"
+            src={match?.img}
+            alt={`${match?.name} | ${match?.age} | ${match?.breed}`}
+          />
+        </div>
         <div className="match-modal__buttons">
           <button className="btn--primary" onClick={handleClose}>
             Hooray!
